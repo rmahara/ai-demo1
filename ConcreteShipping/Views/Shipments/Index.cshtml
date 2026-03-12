@@ -1,0 +1,47 @@
+@model IEnumerable<ConcreteShipping.Models.Shipment>
+@{
+    ViewData["Title"] = "出荷実績一覧";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>出荷実績一覧</h2>
+    <a asp-action="Create" class="btn btn-primary">出荷指示</a>
+</div>
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>出荷番号</th>
+            <th>出荷日時</th>
+            <th>受注番号</th>
+            <th>納入先</th>
+            <th>車両</th>
+            <th>数量(m³)</th>
+            <th>ステータス</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.ShippedAt.ToString("MM/dd HH:mm")</td>
+                <td>@item.OrderId</td>
+                <!-- 意図的な問題: N+1クエリ - Includeなしでナビゲーションプロパティにアクセス -->
+                <td>@item.Order?.DeliveryAddress</td>
+                <td>@item.Vehicle?.LicensePlate</td>
+                <td>@item.Quantity</td>
+                <td>
+                    <span class="badge @(item.Status == "Delivered" ? "bg-success" : "bg-warning")">
+                        @(item.Status == "Delivered" ? "配達完了" : "出荷中")
+                    </span>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">詳細</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">編集</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

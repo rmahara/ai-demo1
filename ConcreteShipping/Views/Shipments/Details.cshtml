@@ -1,0 +1,50 @@
+@model ConcreteShipping.Models.Shipment
+@{
+    ViewData["Title"] = "出荷詳細";
+}
+
+<h2>出荷詳細 - #@Model.Id</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">出荷番号</dt>
+                    <dd class="col-sm-8">@Model.Id</dd>
+                    <dt class="col-sm-4">出荷日時</dt>
+                    <dd class="col-sm-8">@Model.ShippedAt.ToString("yyyy/MM/dd HH:mm")</dd>
+                    <dt class="col-sm-4">受注番号</dt>
+                    <dd class="col-sm-8">@Model.OrderId</dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">得意先</dt>
+                    <dd class="col-sm-8">@Model.Order?.Customer?.Name</dd>
+                    <dt class="col-sm-4">車両</dt>
+                    <dd class="col-sm-8">@Model.Vehicle?.LicensePlate</dd>
+                    <dt class="col-sm-4">運転手</dt>
+                    <dd class="col-sm-8">@Model.Vehicle?.DriverName</dd>
+                    <dt class="col-sm-4">出荷量</dt>
+                    <dd class="col-sm-8">@Model.Quantity m³</dd>
+                    <dt class="col-sm-4">ステータス</dt>
+                    <dd class="col-sm-8">
+                        <span class="badge @(Model.Status == "Delivered" ? "bg-success" : "bg-warning")">
+                            @(Model.Status == "Delivered" ? "配達完了" : "出荷中")
+                        </span>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <dl class="row">
+            <dt class="col-sm-2">納入先</dt>
+            <dd class="col-sm-10">@Model.Order?.DeliveryAddress</dd>
+            <dt class="col-sm-2">備考</dt>
+            <dd class="col-sm-10">@Model.Notes</dd>
+        </dl>
+    </div>
+</div>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">編集</a>
+<a asp-action="Index" class="btn btn-secondary">一覧へ戻る</a>

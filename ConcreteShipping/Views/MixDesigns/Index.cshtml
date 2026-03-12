@@ -1,0 +1,42 @@
+@model IEnumerable<ConcreteShipping.Models.MixDesign>
+@{
+    ViewData["Title"] = "配合マスタ一覧";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>配合マスタ</h2>
+    <a asp-action="Create" class="btn btn-primary">新規追加</a>
+</div>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>コード</th>
+            <th>配合名</th>
+            <th>強度(Fc)</th>
+            <th>スランプ</th>
+            <th>骨材</th>
+            <th>単価</th>
+            <th>有効</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><code>@item.Code</code></td>
+                <td>@item.Name</td>
+                <td>@item.Strength N/mm²</td>
+                <td>@item.Slump cm</td>
+                <td>@item.Aggregate</td>
+                <td>¥@item.UnitPrice.ToString("N0")</td>
+                <td>@(item.IsActive ? "✓" : "-")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">編集</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">削除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,28 @@
+@model ConcreteShipping.Models.Customer
+@{
+    ViewData["Title"] = "得意先詳細";
+}
+
+<h2>得意先詳細</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">得意先名</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+            <dt class="col-sm-3">担当者</dt>
+            <dd class="col-sm-9">@Model.ContactPerson</dd>
+            <dt class="col-sm-3">電話番号</dt>
+            <dd class="col-sm-9">@Model.Phone</dd>
+            <dt class="col-sm-3">住所</dt>
+            <dd class="col-sm-9">@Model.Address</dd>
+            <dt class="col-sm-3">単価</dt>
+            <dd class="col-sm-9">¥@Model.UnitPrice.ToString("N0") / m³</dd>
+            <dt class="col-sm-3">有効</dt>
+            <dd class="col-sm-9">@(Model.IsActive ? "有効" : "無効")</dd>
+        </dl>
+    </div>
+</div>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">編集</a>
+<a asp-action="Index" class="btn btn-secondary">一覧へ戻る</a>

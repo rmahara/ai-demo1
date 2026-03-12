@@ -1,0 +1,40 @@
+@model ConcreteShipping.Models.Customer
+@{
+    ViewData["Title"] = "得意先登録";
+}
+
+<h2>得意先登録</h2>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">得意先名</label>
+                    <input asp-for="Name" class="form-control" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">担当者</label>
+                    <input asp-for="ContactPerson" class="form-control" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">電話番号</label>
+                    <input asp-for="Phone" class="form-control" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">単価 (円/m³)</label>
+                    <input asp-for="UnitPrice" type="number" class="form-control" />
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">住所</label>
+                    <input asp-for="Address" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">登録</button>
+            <a asp-action="Index" class="btn btn-secondary">キャンセル</a>
+        </div>
+    </div>
+</form>

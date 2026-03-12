@@ -1,0 +1,33 @@
+@model ConcreteShipping.Models.Order
+@{
+    ViewData["Title"] = "受注削除";
+}
+
+<h2>受注削除確認</h2>
+
+<div class="alert alert-danger">
+    <strong>以下の受注を削除します。この操作は取り消せません。</strong>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">受注番号</dt>
+            <dd class="col-sm-9">@Model.Id</dd>
+            <dt class="col-sm-3">得意先</dt>
+            <dd class="col-sm-9">@Model.Customer?.Name</dd>
+            <dt class="col-sm-3">配合</dt>
+            <dd class="col-sm-9">@Model.MixDesign?.Name</dd>
+            <dt class="col-sm-3">数量</dt>
+            <dd class="col-sm-9">@Model.Quantity m³</dd>
+            <dt class="col-sm-3">納期</dt>
+            <dd class="col-sm-9">@Model.DeliveryDate.ToString("yyyy/MM/dd")</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">削除する</button>
+    <a asp-action="Index" class="btn btn-secondary">キャンセル</a>
+</form>

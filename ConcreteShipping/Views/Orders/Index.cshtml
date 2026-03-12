@@ -1,0 +1,65 @@
+@model IEnumerable<ConcreteShipping.Models.Order>
+@{
+    ViewData["Title"] = "受注一覧";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>受注一覧</h2>
+    <a asp-action="Create" class="btn btn-primary">新規受注入力</a>
+</div>
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>受注番号</th>
+            <th>受注日</th>
+            <th>得意先</th>
+            <th>配合</th>
+            <th>数量(m³)</th>
+            <th>納期</th>
+            <th>ステータス</th>
+            <th>備考</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.OrderDate.ToString("MM/dd")</td>
+                <!-- 意図的な問題: N+1クエリ - Includeなしでナビゲーションプロパティにアクセス -->
+                <td>@item.Customer?.Name</td>
+                <td>@item.MixDesign?.Code</td>
+                <td>@item.Quantity</td>
+                <td>@item.DeliveryDate.ToString("MM/dd")</td>
+                <td>
+                    @{
+                        var badgeClass = item.Status switch {
+                            "Pending" => "bg-secondary",
+                            "Assigned" => "bg-primary",
+                            "Shipped" => "bg-warning",
+                            "Completed" => "bg-success",
+                            _ => "bg-secondary"
+                        };
+                        var statusLabel = item.Status switch {
+                            "Pending" => "未配車",
+                            "Assigned" => "配車済",
+                            "Shipped" => "出荷中",
+                            "Completed" => "完了",
+                            _ => item.Status
+                        };
+                    }
+                    <span class="badge @badgeClass">@statusLabel</span>
+                </td>
+                <!-- 意図的な問題: XSS脆弱性 - Html.Rawを使用 -->
+                <td>@Html.Raw(item.Notes)</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">詳細</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">編集</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">削除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

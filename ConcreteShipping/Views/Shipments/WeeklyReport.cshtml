@@ -1,0 +1,54 @@
+@model IEnumerable<ConcreteShipping.Models.Shipment>
+@{
+    ViewData["Title"] = "週次集計レポート";
+}
+
+<h2>週次集計レポート</h2>
+<p class="text-muted">集計期間: @((DateTime)ViewBag.WeekStart).ToString("yyyy/MM/dd") ～ @((DateTime)ViewBag.WeekEnd).ToString("yyyy/MM/dd")</p>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <h5>総出荷便数</h5>
+                <h2>@ViewBag.TripCount 便</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <h5>総出荷量</h5>
+                <h2>@ViewBag.TotalQuantity m³</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>出荷日時</th>
+            <th>得意先</th>
+            <th>車両</th>
+            <th>数量(m³)</th>
+            <th>ステータス</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr><td colspan="5" class="text-center">今週の出荷データはありません</td></tr>
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ShippedAt.ToString("MM/dd HH:mm")</td>
+                <td>@item.Order?.Customer?.Name</td>
+                <td>@item.Vehicle?.LicensePlate</td>
+                <td>@item.Quantity</td>
+                <td>@(item.Status == "Delivered" ? "配達完了" : "出荷中")</td>
+            </tr>
+        }
+    </tbody>
+</table>

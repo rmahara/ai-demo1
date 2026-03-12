@@ -1,0 +1,44 @@
+@model IEnumerable<ConcreteShipping.Models.Order>
+@{
+    ViewData["Title"] = "配車計画";
+}
+
+<h2>配車計画</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">未配車の受注はありません。</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>受注番号</th>
+                <th>得意先</th>
+                <th>配合</th>
+                <th>数量(m³)</th>
+                <th>納期</th>
+                <th>納入先</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Customer?.Name</td>
+                    <td>@item.MixDesign?.Code</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.DeliveryDate.ToString("MM/dd")</td>
+                    <td>@item.DeliveryAddress</td>
+                    <td>
+                        <a asp-controller="Shipments" asp-action="Create" asp-route-orderId="@item.Id"
+                           class="btn btn-sm btn-success">出荷指示</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

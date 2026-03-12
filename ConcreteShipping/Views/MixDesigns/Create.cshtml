@@ -1,0 +1,44 @@
+@model ConcreteShipping.Models.MixDesign
+@{
+    ViewData["Title"] = "配合登録";
+}
+
+<h2>配合登録</h2>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">配合コード</label>
+                    <input asp-for="Code" class="form-control" placeholder="例: 21N-8-20" />
+                </div>
+                <div class="col-md-8 mb-3">
+                    <label class="form-label">配合名</label>
+                    <input asp-for="Name" class="form-control" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">強度 (Fc N/mm²)</label>
+                    <input asp-for="Strength" type="number" class="form-control" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">スランプ (cm)</label>
+                    <input asp-for="Slump" type="number" class="form-control" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">骨材最大寸法</label>
+                    <input asp-for="Aggregate" class="form-control" placeholder="例: 20mm" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">単価 (円/m³)</label>
+                    <input asp-for="UnitPrice" type="number" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">登録</button>
+            <a asp-action="Index" class="btn btn-secondary">キャンセル</a>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,43 @@
+@model IEnumerable<ConcreteShipping.Models.Order>
+@{
+    ViewData["Title"] = "月次請求処理";
+}
+
+<h2>月次請求処理</h2>
+<h4>@ViewBag.Year 年 @ViewBag.Month 月</h4>
+
+<div class="alert alert-warning">
+    <strong>確認:</strong> 以下の受注に対して請求処理を実行します。
+</div>
+
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>受注番号</th>
+            <th>得意先</th>
+            <th>配合</th>
+            <th>数量</th>
+            <th>金額</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Customer?.Name</td>
+                <td>@item.MixDesign?.Code</td>
+                <td>@item.Quantity m³</td>
+                <td>¥@((item.Quantity * (item.MixDesign?.UnitPrice ?? 0)).ToString("N0"))</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- 意図的な問題: CSRFトークンなし -->
+<form asp-action="Process" method="post">
+    <input type="hidden" name="year" value="@ViewBag.Year" />
+    <input type="hidden" name="month" value="@ViewBag.Month" />
+    <button type="submit" name="action" value="process" class="btn btn-primary">請求処理実行</button>
+    <a asp-action="Index" class="btn btn-secondary">キャンセル</a>
+</form>

@@ -1,0 +1,71 @@
+@model ConcreteShipping.Models.Order
+@{
+    ViewData["Title"] = "受注詳細";
+}
+
+<h2>受注詳細 - #@Model.Id</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">受注番号</dt>
+                    <dd class="col-sm-8">@Model.Id</dd>
+                    <dt class="col-sm-4">受注日</dt>
+                    <dd class="col-sm-8">@Model.OrderDate.ToString("yyyy/MM/dd")</dd>
+                    <dt class="col-sm-4">得意先</dt>
+                    <dd class="col-sm-8">@Model.Customer?.Name</dd>
+                    <dt class="col-sm-4">担当者</dt>
+                    <dd class="col-sm-8">@Model.Customer?.ContactPerson</dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">配合</dt>
+                    <dd class="col-sm-8">@Model.MixDesign?.Name (@Model.MixDesign?.Code)</dd>
+                    <dt class="col-sm-4">数量</dt>
+                    <dd class="col-sm-8">@Model.Quantity m³</dd>
+                    <dt class="col-sm-4">納期</dt>
+                    <dd class="col-sm-8">@Model.DeliveryDate.ToString("yyyy/MM/dd")</dd>
+                    <dt class="col-sm-4">ステータス</dt>
+                    <dd class="col-sm-8">@Model.Status</dd>
+                </dl>
+            </div>
+        </div>
+        <dl class="row">
+            <dt class="col-sm-2">納入先</dt>
+            <dd class="col-sm-10">@Model.DeliveryAddress</dd>
+            <dt class="col-sm-2">備考</dt>
+            <!-- 意図的な問題: XSS脆弱性 -->
+            <dd class="col-sm-10">@Html.Raw(Model.Notes)</dd>
+        </dl>
+    </div>
+</div>
+
+@if (Model.Shipments != null && Model.Shipments.Any())
+{
+    <h4>出荷実績</h4>
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>出荷日時</th>
+                <th>数量</th>
+                <th>ステータス</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var s in Model.Shipments)
+            {
+                <tr>
+                    <td>@s.ShippedAt.ToString("MM/dd HH:mm")</td>
+                    <td>@s.Quantity m³</td>
+                    <td>@s.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">編集</a>
+<a asp-action="Index" class="btn btn-secondary">一覧へ戻る</a>

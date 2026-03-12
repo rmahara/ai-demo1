@@ -1,0 +1,300 @@
+/* ===== リセット & ベース ===== */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+@media (min-width: 768px) {
+    html { font-size: 14px; }
+}
+
+/* ===== アプリ全体レイアウト ===== */
+.app-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ===== サイドバー ===== */
+.sidebar {
+    width: 220px;
+    min-height: 100vh;
+    background: #1e293b;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    transition: width 0.2s ease;
+    overflow: hidden;
+}
+
+.sidebar.collapsed {
+    width: 0;
+}
+
+.sidebar-header {
+    padding: 20px 16px 12px;
+}
+
+.sidebar-brand {
+    font-size: 16px;
+    font-weight: 700;
+    color: #f1f5f9 !important;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.sidebar-divider {
+    border-color: #334155;
+    margin: 0 0 8px;
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.sidebar-nav-section {
+    padding: 12px 16px 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #64748b;
+    white-space: nowrap;
+}
+
+.sidebar-nav-item {
+    padding: 0 8px;
+}
+
+.sidebar-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    border-radius: 6px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 13px;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+}
+
+.sidebar-nav-link:hover {
+    background: #334155;
+    color: #f1f5f9;
+}
+
+.sidebar-nav-link.active {
+    background: #3b82f6;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.sidebar-icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.sidebar-footer {
+    padding: 12px 16px;
+    border-top: 1px solid #334155;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.sidebar-footer a {
+    color: #94a3b8;
+}
+
+/* ===== メインコンテンツ ===== */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    transition: margin-left 0.2s ease;
+}
+
+.main-content.expanded {
+    margin-left: 0;
+}
+
+/* ===== ヘッダー ===== */
+.main-header {
+    height: 56px;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.main-header-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.sidebar-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #64748b;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-toggle:hover {
+    color: #0f172a;
+}
+
+/* ===== メインボディ ===== */
+.main-body {
+    flex: 1;
+    padding: 24px;
+}
+
+/* ===== フッター ===== */
+.main-footer {
+    padding: 12px 24px;
+    font-size: 12px;
+    color: #94a3b8;
+    border-top: 1px solid #e2e8f0;
+    background: #ffffff;
+}
+
+/* ===== カード ===== */
+.card {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.card-header {
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    font-weight: 600;
+    padding: 12px 16px;
+}
+
+/* ===== KPIカード ===== */
+.kpi-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.kpi-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.kpi-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e3a5f;
+    line-height: 1.2;
+    margin: 4px 0;
+}
+
+.kpi-sub {
+    font-size: 11px;
+    color: #64748b;
+}
+
+/* ===== テーブル ===== */
+.table {
+    font-size: 13px;
+}
+
+.table thead th {
+    background: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid #e2e8f0;
+    padding: 10px 12px;
+}
+
+.table tbody td {
+    padding: 10px 12px;
+    vertical-align: middle;
+    border-color: #f1f5f9;
+}
+
+/* ===== バッジ ===== */
+.badge-status {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.badge-pending    { background: #f1f5f9; color: #475569; }
+.badge-assigned   { background: #dbeafe; color: #1e40af; }
+.badge-shipped    { background: #fef9c3; color: #854d0e; }
+.badge-completed  { background: #dcfce7; color: #166534; }
+
+/* 既存 Bootstrap との互換 */
+.status-pending   { color: #6c757d; }
+.status-assigned  { color: #0d6efd; }
+.status-shipped   { color: #fd7e14; }
+.status-completed { color: #198754; }
+
+/* ===== フォーム ===== */
+.form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.form-control, .form-select {
+    font-size: 13px;
+    border-color: #e2e8f0;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+}
+
+/* ===== ボタン ===== */
+.btn-primary {
+    background: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.btn-primary:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+/* ===== ページタイトル ===== */
+.page-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 20px;
+}

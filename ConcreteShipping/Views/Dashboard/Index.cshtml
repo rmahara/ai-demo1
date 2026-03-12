@@ -1,0 +1,118 @@
+@{
+    ViewData["Title"] = "ダッシュボード";
+}
+
+<!-- KPIカード -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="kpi-card">
+            <div class="kpi-label">受注総数</div>
+            <div class="kpi-value">@ViewBag.TotalOrders</div>
+            <div class="kpi-sub">全期間</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="kpi-card">
+            <div class="kpi-label">未配車受注</div>
+            <div class="kpi-value" style="color:#ef4444">@ViewBag.PendingOrders</div>
+            <div class="kpi-sub" style="color:#ef4444">要対応あり</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="kpi-card">
+            <div class="kpi-label">本日出荷便数</div>
+            <div class="kpi-value">@ViewBag.ShippedToday</div>
+            <div class="kpi-sub">今日の出荷</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="kpi-card">
+            <div class="kpi-label">本日出荷量</div>
+            <div class="kpi-value">@ViewBag.TotalQuantityToday <span style="font-size:16px;font-weight:400">m³</span></div>
+            <div class="kpi-sub">今日の合計</div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <!-- 週次出荷量グラフ -->
+    <div class="col-md-8">
+        <div class="card h-100">
+            <div class="card-header">直近7日間の出荷量 (m³)</div>
+            <div class="card-body">
+                <canvas id="shipmentChart" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- 受注ステータス -->
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-header">受注ステータス</div>
+            <div class="card-body">
+                <canvas id="statusChart" height="180"></canvas>
+                <div class="mt-3 d-flex flex-column gap-2">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge-status badge-pending">未配車</span>
+                        <strong>@ViewBag.StatusPending</strong>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge-status badge-assigned">配車済</span>
+                        <strong>@ViewBag.StatusAssigned</strong>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge-status badge-shipped">出荷中</span>
+                        <strong>@ViewBag.StatusShipped</strong>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge-status badge-completed">完了</span>
+                        <strong>@ViewBag.StatusCompleted</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+const shipCtx = document.getElementById('shipmentChart').getContext('2d');
+new Chart(shipCtx, {
+    type: 'bar',
+    data: {
+        labels: [@Html.Raw(ViewBag.ChartLabels)],
+        datasets: [{
+            label: '出荷量 (m³)',
+            data: [@ViewBag.ChartData],
+            backgroundColor: 'rgba(59,130,246,0.5)',
+            borderColor: 'rgba(59,130,246,1)',
+            borderWidth: 1,
+            borderRadius: 4
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { beginAtZero: true, title: { display: true, text: 'm³' }, grid: { color: '#f1f5f9' } },
+            x: { grid: { display: false } }
+        }
+    }
+});
+
+const statusCtx = document.getElementById('statusChart').getContext('2d');
+new Chart(statusCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['未配車', '配車済', '出荷中', '完了'],
+        datasets: [{
+            data: [@ViewBag.StatusPending, @ViewBag.StatusAssigned, @ViewBag.StatusShipped, @ViewBag.StatusCompleted],
+            backgroundColor: ['#e2e8f0', '#bfdbfe', '#fef9c3', '#bbf7d0'],
+            borderColor: ['#94a3b8', '#3b82f6', '#f59e0b', '#22c55e'],
+            borderWidth: 2
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false } }, cutout: '65%' }
+});
+</script>
+}

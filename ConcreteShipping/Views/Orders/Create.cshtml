@@ -1,0 +1,55 @@
+@model ConcreteShipping.Models.Order
+@{
+    ViewData["Title"] = "受注入力";
+}
+
+<h2>受注入力</h2>
+
+<!-- 意図的な問題: CSRFトークンなし (@Html.AntiForgeryToken() を省略) -->
+<form asp-action="Create" method="post">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">得意先</label>
+                    <select asp-for="CustomerId" asp-items="ViewBag.Customers" class="form-select">
+                        <option value="">-- 選択してください --</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">配合</label>
+                    <select asp-for="MixDesignId" asp-items="ViewBag.MixDesigns" class="form-select">
+                        <option value="">-- 選択してください --</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">数量 (m³)</label>
+                    <input asp-for="Quantity" type="number" step="0.5" class="form-control" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">納期</label>
+                    <input asp-for="DeliveryDate" type="date" class="form-control" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">受注区分</label>
+                    <select asp-for="OrderType" class="form-select">
+                        <option value="PreOrder">事前受注</option>
+                        <option value="Phone">電話受注</option>
+                    </select>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">納入先住所</label>
+                    <input asp-for="DeliveryAddress" class="form-control" />
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">備考</label>
+                    <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">受注登録</button>
+            <a asp-action="Index" class="btn btn-secondary">キャンセル</a>
+        </div>
+    </div>
+</form>

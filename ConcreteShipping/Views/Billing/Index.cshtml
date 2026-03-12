@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "月次請求一覧";
+    var billing = ViewBag.BillingData as IEnumerable<dynamic>;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>月次請求一覧</h2>
+    <span class="text-muted">@ViewBag.Year 年 @ViewBag.Month 月</span>
+</div>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>得意先</th>
+            <th>受注件数</th>
+            <th>出荷量合計 (m³)</th>
+            <th>請求金額</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (billing != null)
+        {
+            @foreach (var item in billing)
+            {
+                <tr>
+                    <td>@item.CustomerName</td>
+                    <td>@item.OrderCount</td>
+                    <td>@item.TotalQuantity</td>
+                    <td>¥@item.TotalAmount.ToString("N0")</td>
+                    <td>
+                        <a asp-action="Process" asp-route-year="@ViewBag.Year"
+                           asp-route-month="@ViewBag.Month" class="btn btn-sm btn-primary">請求処理</a>
+                    </td>
+                </tr>
+            }
+            <tr class="table-warning fw-bold">
+                <td colspan="3">合計</td>
+                <td>¥@((decimal)ViewBag.GrandTotal).ToString("N0")</td>
+                <td></td>
+            </tr>
+        }
+        else
+        {
+            <tr><td colspan="5" class="text-center">今月の完了受注はありません</td></tr>
+        }
+    </tbody>
+</table>

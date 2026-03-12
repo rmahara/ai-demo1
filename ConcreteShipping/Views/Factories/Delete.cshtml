@@ -1,0 +1,15 @@
+@model ConcreteShipping.Models.Factory
+@{
+    ViewData["Title"] = "工場削除";
+}
+
+<h2>工場削除確認</h2>
+<div class="alert alert-danger">
+    <strong>「@Model.Name」を削除します。</strong>
+</div>
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">削除する</button>
+    <a asp-action="Index" class="btn btn-secondary">キャンセル</a>
+</form>

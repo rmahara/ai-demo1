@@ -1,0 +1,15 @@
+@model ConcreteShipping.Models.Customer
+@{
+    ViewData["Title"] = "得意先削除";
+}
+
+<h2>得意先削除確認</h2>
+<div class="alert alert-danger">
+    <strong>「@Model.Name」を削除します。この操作は取り消せません。</strong>
+</div>
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">削除する</button>
+    <a asp-action="Index" class="btn btn-secondary">キャンセル</a>
+</form>
