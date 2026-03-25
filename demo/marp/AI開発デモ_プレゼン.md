@@ -11,6 +11,11 @@ style: |
     color: #e0e0e0;
     font-size: 28px;
     line-height: 1.5;
+    padding: 110px 64px 24px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    position: relative;
   }
   section h1 {
     color: #00d2ff;
@@ -18,14 +23,40 @@ style: |
     font-weight: 900;
     text-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
   }
+  section > h2:first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding-left: 52px;
+    box-sizing: border-box;
+    color: #00d2ff;
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0;
+    border-bottom: none;
+    background: rgba(15, 12, 41, 0.85);
+  }
+  section > h2:first-child::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, rgba(0, 210, 255, 0.8) 0%, rgba(0, 210, 255, 0.1) 100%);
+  }
   section h2 {
     color: #00d2ff;
-    font-size: 44px;
+    font-size: 36px;
     font-weight: 700;
-    border-bottom: 3px solid rgba(0, 210, 255, 0.4);
-    padding-bottom: 10px;
-    margin-bottom: 24px;
-    margin-top: -30px;
+    border-bottom: 2px solid rgba(0, 210, 255, 0.3);
+    padding-bottom: 6px;
+    margin-bottom: 16px;
+    margin-top: 8px;
   }
   section h3 {
     color: #a0c4ff;
@@ -59,7 +90,20 @@ style: |
     align-items: center;
     text-align: center;
     background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    padding: 80px;
   }
+  section.title > h2:first-child {
+    position: static;
+    width: auto;
+    height: auto;
+    padding-left: 0;
+    background: none;
+    font-size: 44px;
+    text-align: center;
+    border-bottom: none;
+    margin-bottom: 8px;
+  }
+  section.title > h2:first-child::after { display: none; }
   section.title h1 {
     font-size: 72px;
     margin-bottom: 0;
@@ -78,18 +122,29 @@ style: |
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
     background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    padding: 0 80px;
   }
-  section.section-break h2 {
+  section.section-break > h2:first-child {
+    position: static;
+    width: auto;
+    height: auto;
+    padding-left: 24px;
+    background: none;
     font-size: 56px;
     border-bottom: none;
+    border-left: 6px solid #00d2ff;
     color: #00d2ff;
+    margin: 0;
+    align-items: center;
   }
+  section.section-break > h2:first-child::after { display: none; }
   section.section-break p {
     font-size: 28px;
     color: #a0c4ff;
+    padding-left: 30px;
+    margin-top: 12px;
   }
   section.highlight-box {
     background: linear-gradient(135deg, #0d1b2a, #1b2838, #162447);
@@ -101,11 +156,20 @@ style: |
     align-items: center;
     text-align: center;
     background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    padding: 80px;
   }
-  section.closing h2 {
+  section.closing > h2:first-child {
+    position: static;
+    width: auto;
+    height: auto;
+    padding-left: 0;
+    background: none;
     border-bottom: none;
     font-size: 52px;
+    text-align: center;
+    margin-bottom: 16px;
   }
+  section.closing > h2:first-child::after { display: none; }
   section.huge {
     display: flex;
     justify-content: center;
@@ -219,23 +283,23 @@ ul ul li { font-size: 25px; margin-bottom: 2px; }
   - 今年度：AI活用と落ち着きを取り戻し、定時退社を実現！
 - **趣味・現状**
   - 筋トレ（ベンチプレス100kg）→ 怪我で休養中😭
-  - ジムやめて暇すぎて **毎日3時間以上AIで遊ぶ、休日は10時間以上** ※課金 月額1万超
-  - 難しいAI理論は苦手＆興味なし！ AIの利用・開発経験は **1000時間超**
-
+  - ジムやめて暇すぎて **毎日帰宅後3時間以上AI使う、休日は10時間以上**　※AI課金 月額1万超
+  - 難しいAI理論は苦手＆興味なし。AI利用・開発経験は **1500時間超 💪**
 ---
 
-## アジェンダ（50分想定）
+## アジェンダ（45分想定）
 
 | # | 内容 | 時間 |
 |:-:|:--|:-:|
-| 1 | 当部でのAI活用事例と裏話 | 3分 |
+| 1 | 当部でのAI活用事例と裏話 | 5分 |
 | 2 | 「AIと開発する」とは？（概念説明） | 2分 |
-| 3 | 絶対にやるべきこと | 15分 |
+| 3 | 絶対にやるべき準備 ① Markdown化、 ② Git、 ③ 評価できる範囲から | 15分 |
+| 3+ | 番外編：Amazon AI-DLC の活用 / ビジョンを広げる | 〜 |
 | 4 | デモアプリ紹介とシナリオ | 3分 |
-| 5 | **デモ：並列タスク同時実行開始** | 2分 |
+| 5 | **デモ：並列タスク同時実行開始** | 5分 |
 | 6 | デモ待機中：主要な生成AIサービスの紹介 | 10分 |
 | 7 | 結果検証・まとめ | 5分 |
-| 8 | 質疑応答（Q&A） | 5分 |
+| 8 | 質疑応答（Q&A） |  |
 
 ---
 
@@ -358,7 +422,7 @@ li { font-size: 26px; margin-bottom: 4px; }
 
 ---
 
-## 絶対にやるべき準備 ①-1：仕様書のMarkdown化
+## 絶対にやるべき準備 ①：仕様書のMarkdown化
 
 ### 🤖 AIと協働で仕様書を作成する「2つの目標」
 - ドキュメントを **「プロジェクトで完全に統一したフォーマット」** にする。
@@ -371,7 +435,7 @@ li { font-size: 26px; margin-bottom: 4px; }
 
 ---
 
-## 絶対にやるべき準備 ①-2：ツール概要
+## ① 深掘り：ツールの使い方
 
 ### 🛠️ ファイルを1つ読ませて、大雑把な要件を伝えるだけ
 - AIに初期ファイル（プロジェクトルール）を読み込ませる。
@@ -383,7 +447,7 @@ li { font-size: 26px; margin-bottom: 4px; }
 
 ---
 
-## 絶対にやるべき準備 ①-3：時間配分と人間の責任
+## ① 深掘り：時間配分と人間の責任
 
 ### ⏳ 「時間配分」の劇的変化
 - 仕様書の作成は **従来の半分の時間で高品質** に！
@@ -394,7 +458,7 @@ li { font-size: 26px; margin-bottom: 4px; }
 - 生成された成果物を **完全に「自分のもの」にする責任（評価）** を持つ。
   
 ⚠️ 内容の確認漏れは **「AIとは無関係のヒューマンエラー」** 
- 品質を担保するため、AI時代であっても **人間のダブルチェック** がに重要。
+ 品質を担保するため、AI時代であっても **人間のダブルチェック** が重要。
 
 ---
 
@@ -403,11 +467,11 @@ li { font-size: 26px; }
 h3 { margin-top: 15px; margin-bottom: 5px; font-size: 32px; }
 </style>
 
-## 絶対にやるべき準備 ①-4：チームで感じた利点1
+## ① 深掘り：チームで感じた利点
 
 ### 💡 レビュー充実による「属人化の軽減」
-- 全員でレビューし合うため **「その機能は担当外なので分かりません」という状態が軽減した** 。
 - レビュー用に「曖昧点、保留事項、お客様確認事項」などをまとめてと、AIに伝達するだけで、レビュー資料を即座に作成してくれる。
+- 全員でレビューし合うため **「その機能は担当外なので分かりません」という状態が軽減した** 
 
 ### 🌱 未経験者への「タスク委譲」と「成長の機会」
 - 外注SEや仕様作成未経験のPGでも、AI補助によって **「80点の成果物」** が完成する。
@@ -416,7 +480,7 @@ h3 { margin-top: 15px; margin-bottom: 5px; font-size: 32px; }
 
 ---
 
-## 絶対にやるべき準備 ①-5：チームで感じた利点2
+## ① 深掘り：仕様変更対応とAIへの直結
 
 ### 🔄 仕様変更時の「一貫した自動修正」
 - レビュー後の指摘・仕様変更箇所を、AIに伝達するだけで逆質問が始まり、影響範囲となる各資料を **一貫して漏れなく自動修正** してくれる。
@@ -426,23 +490,57 @@ h3 { margin-top: 15px; margin-bottom: 5px; font-size: 32px; }
 
 ---
 
-## 絶対にやるべき準備 ②～④
+## ① 深掘り：現実的な課題とMarkdownへの移行
 
-### 🔀 2. Gitへの完全移行
+### 🚧 現実的な壁：「Excel, Wordで納品しなければならない」問題
+- 客先納品フォーマット、他社との共同開発など、**自分たちだけ勝手に変えられないケース**がある。
+- 対策：内部はMarkdownで素早く作りレビューまで終わらせ、**後からExcelに転記**する運用も一案（2重管理の問題は残るが…）
+
+### 💡 個人的な理想
+- 信頼関係があれば **「今後はMarkdownで進めましょう」とお客様ごとリードしていく**のが理想。
+- AI活用はビジネスでも間違いなく「当たり前」になる。堂々と新しいスタイルへ移行してもいいと思います。
+
+---
+
+<style scoped>
+h3 { font-size: 30px; margin-top: 10px; margin-bottom: 4px; }
+li { font-size: 23px; margin-bottom: 3px; line-height: 1.4; }
+</style>
+
+## ⚠️　AI推進の落とし穴：経験値の問題
+
+### 🚀 AIと一緒なら「今の実力の150%」が出せる
+- AIと協働すると、自分一人では難しい設計や実装も高品質で実現できる。
+- しかし、その時に積まれる **「自分自身の経験値は3分の1、または0」** という感覚がある。
+
+### 🎓 会社としての教育方針にも影響する
+- AI推進は良いが、**経験値が蓄積されない問題** は真剣に考える必要がある。
+- 例：研修期間中は「自力で正解に近い答えを出せるようになるまでAI禁止」など、段階的な解禁ルールも一案。
+
+### 🔁 「AIでできた！」の直後にやること
+- 「すごいことができた」と感じた時こそ、**自力で再現するリハビリ**が重要。
+- 理想は **もう一度、自分の手でやり直すこと**。少なくとも経験値を **3分の1 → 2分の1** に縮める意識を持つ。
+
+---
+
+## 絶対にやるべき準備 ②・③
+
+### 🔀 ② Gitへの完全移行
 
 - Subversionは卒業
 - Gitは難易度が高いからこそ、AI開発の **前提** として早急にメンバーに慣れさせる
+- プルリクエスト・コードレビューの徹底運用で品質が大きく変わる
 
-### 🎯 3. 「自分たちで評価できる内容」から経験を積む
+### 🎯 ③ 「自分たちで評価できる内容」から経験を積む
 
 - いきなり新規開発に投入せず、**数年以上運用してきたプロジェクト**の仕様作成・改修・調査・保守で経験を積む
 - **要件定義や提案書の作成** など、正しさを自分の目で判断できる領域が鉄則
 
 ---
 
-## Amazon AI-DLC の活用
+## 💡 番外編：Amazon AI-DLC の活用
 
-### 🚀 4. プロジェクトの「初動」でAI-DLCを活用する
+### 🚀 プロジェクトの「初動」でAI-DLCを活用する
 
 - プログラムにAIを使っても速度向上は **約10%程度**
 - Amazonは **一番のボトルネックは客先や部署間の連携品質** にあると着目
@@ -508,7 +606,7 @@ AIが作った説明会資料
 
 - メニュー画面と基本データ追加機能は動く
 - テストコードなし、ドキュメントなし、セキュリティ未対策
-- *あえて「荒削り」な状態からスタート*
+- *5分で作ったので「荒削り」な状態からスタート*
 
 ---
 
@@ -521,29 +619,30 @@ Claude Code 実演デモ
 
 ## ライブデモのシナリオ
 
-これからターミナルを立ち上げ、以下の **3~4タスクをAIに同時並行で** 依頼します。
+これからターミナルを立ち上げ、以下の **4タスクをAIに同時並行で** 依頼します。
 
 <div class="two-column">
 <div>
 
-### 🔧 Task A：バックエンド
-数量データの **ValueObject化**
-（業務ルールのカプセル化）
+### 🔧 Task A：リファクタリング
+- 数量データの **ValueObject化** ＋
+受注入力の **バリデーション修正**
 
-### 🎨 Task B：UI/フロント
-システム全体への
-**ダークモード** 切り替え機能
+### 🐛 Task B：バグ修正
+- 受注登録 未入力で**保存エラー解消**
+- 受注一覧の **得意先名・配合名**
+が表示されない問題を修正
 
 </div>
 <div>
 
-### 🌤 Task C：外部API連携
-天気予報APIを活用した
-**ウィジェット作成**
+### 🎨 Task C：UI/フロント
+- システム全体への
+**ダークモード** 切り替え機能
 
-### ⏱ 並列実行
-3つのターミナルで
-**同時にAIが自律開発**
+### 🌤 Task D：外部システム連携
+- 天気予報APIを活用した
+**ウィジェット作成**
 
 </div>
 </div>
@@ -554,7 +653,7 @@ Claude Code 実演デモ
 
 ## ⚡ ライブデモ実況
 
-*スライドを閉じ、3分割されたターミナルとWebアプリの画面を投影*
+*スライドを閉じ、4分割されたターミナルとWebアプリの画面を投影*
 
 ---
 
@@ -566,32 +665,33 @@ Claude Code 実演デモ
 ---
 
 <style scoped>
-table { font-size: 18px !important; margin-top: -10px !important; }
-table th, table td { padding: 4px 8px !important; line-height: 1.3 !important; }
-table th:first-child, table td:first-child { width: 17% !important; text-align: left !important; }
-table th:nth-child(2), table td:nth-child(2) { width: 10% !important; text-align: left !important; }
-table th:nth-child(3), table td:nth-child(3) { width: 36% !important; text-align: left !important; }
-table th:last-child, table td:last-child { width: 37% !important; text-align: left !important; }
-li { margin-bottom: 2px; }
+table { font-size: 15px !important; margin-top: 2px !important; }
+table th, table td { padding: 5px 8px !important; line-height: 1.35 !important; vertical-align: top !important; }
+table th:first-child, table td:first-child { width: 14% !important; text-align: left !important; }
+table th:nth-child(2), table td:nth-child(2) { width: 9% !important; text-align: left !important; }
+table th:nth-child(3), table td:nth-child(3) { width: 12% !important; text-align: left !important; }
+table th:nth-child(4), table td:nth-child(4) { width: 35% !important; text-align: left !important; }
+table th:last-child, table td:last-child { width: 29% !important; text-align: left !important; }
 </style>
 
 ## 主要なAI開発ツールのコストと利用イメージ
 
-| ツール | 価格 | 制限・利用スタイル | 特徴・強み |
-|:---|:---|:---|:---|
-| **Claude Pro** | $20 | 激しく使うと**30分〜1時間で制限到達**<br>約5時間で回復。別途ウィークリー枠制限あり | **論理的思考・単体コーディング能力が現状最強** |
-| **Cursor** | $20 | 月額$20枠まで高速応答、上限到達以降は**低速モードで無制限** | **AIエディタの覇権**。<br>※対抗馬：WindSurf, Kiro, Antigravity |
-| **Google AI Pro** | ￥3,000 | 2026年3月に**利用制限が厳格化**（従来の1/30へ大幅縮小） | Gemini 3 Flashモデルはほぼ無制限。<br>Google One（2TB）等の**豊富な付帯特典が魅力**。 |
-| **GitHub Copilot**| $10～$19 | Agent機能の拡充により、GitHubとの連携が段階的に強化中。リクエスト数制限あり、リクエストを節約するスキルが必要 | GitHubでのTeam一括契約など**経理的な導入ハードルは低い**が、単体のコーディング性能は他に見劣りするとの声も。 |
-| **中国系AI** | **格安** | **セキュリティを自身で担保できる「個人利用」に最適**。<br>企業コンプライアンス上、業務利用は要確認。 | Zhipu等の最新モデル（GLM-5など）が**月額$3程度**で利用できるなど、驚異的な価格破壊が強み。 |
+| ツール | 価格 | 課金方式 | 利用制限 | 特徴・強み |
+|:---|:---|:---|:---|:---|
+| **ChatGPT Plus<br>(OpenAI)** | $20 | 月額定額 | **5-Hour Quota（徐々に回復）＋ Weekly Quota**<br>GPT-5.4, o3 など<br>激しく使うと数時間で消費可能 | **2026年現在、偏差値No.1モデル**「GPT-5.4」<br>総合ベンチマーク最高峰。体感めっちゃ遅い。 |
+| **Claude Pro** | $20 | 月額定額 | **5-Hour Quota（徐々に回復）＋ Weekly Quota**<br>Opus, Sonnet, Haiku<br>激しく使うと30〜60分で消費可能。週次上限も別途あり | **論理的思考・コーディング能力に優れる。失敗が少ない（気がする）。** |
+| **Cursor** | $20 | 月額定額<br>（クレジット制） | **モデル別トークン重み制**<br>好きなAIモデルが使える。<br>100kトークンごとに消費クレジットが異なる。枯渇後は低速モードで**無制限** | **AIエディタの覇権**<br>※対抗馬：WindSurf, Kiro, Antigravity |
+| **Google AI Pro** | ¥3,000 | 月額定額 | **3モデル・各クォータ方式**<br>Gemini Pro 3.1：Weekly Quota<br>Gemini Flash 3.0：5-Hour Quota<br>Claude4.6：Weekly Quota | Google One（2TB）等**豊富な付帯特典**が魅力。Antigravityは頻繁にエラーになる(気がする) |
+| **GitHub Copilot** | $10〜$19 | 月額定額 | **月間リクエスト制**<br>好きなAIモデルが使える。<br>GitHub連携が強み。リクエストを節約するスキルが必要 | **経理的な導入ハードルが低い**<br>Team一括契約が可能 |
+| **GLM（智谱AI）<br>(ジー・プーAI)** | **$10〜** | **月額プリペイド式**<br>（Coding Plan） | **実質無制限に近い**<br>業務利用はコンプライアンス要確認 | GLM-5。Claude Proと比較して 3倍のトークンを利用可。有名で**価格破壊**。 |
 
 ---
 
 <style scoped>
-.card { padding: 25px; }
-li { font-size: 23px; line-height: 1.4; }
-p { font-size: 24px; margin-bottom: 5px; line-height: 1.4; }
-h3 { margin-top: 5px; margin-bottom: 15px; font-size: 30px; }
+.card { padding: 20px; }
+li { font-size: 21px; line-height: 1.4; }
+p { font-size: 22px; margin-bottom: 5px; line-height: 1.4; }
+h3 { margin-top: 5px; margin-bottom: 10px; font-size: 28px; }
 </style>
 
 ## おすすめのAI環境プラン
@@ -599,14 +699,22 @@ h3 { margin-top: 5px; margin-bottom: 15px; font-size: 30px; }
 <div class="two-column">
 <div class="card">
 
-### 💰 コスパセット2選
+### 🌱 まず1つ目を契約するなら
+
+**Claude Pro** または **Cursor Pro**（約3,000円）
+- どちらか1つから始めるのがおすすめ
+- 使い慣れたら2つ目を追加していく
+
+### 💰 コスパセット3選
 
 **① Claude Pro & Google AI Pro**（約6,000円）
-- 普段の小さい作業は「Gemini Flash」
-- 大規模で重要な作業時は「Claude Code」
+- 小さい作業は「Gemini Flash」、重要な作業は「Claude Code」
 
 **② Claude Pro & Cursor Pro**（約6,000円）
 - メインはClaude、制限時にCursorへ切替
+
+**③ Cursor Pro & Google AI Pro**（約6,000円）
+- CursorをメインIDEとして活用するスタイル
 
 </div>
 <div class="card">
@@ -616,12 +724,38 @@ h3 { margin-top: 5px; margin-bottom: 15px; font-size: 30px; }
 **① Claude Pro & Cursor Pro+**（約12,000円）
 - より上位のCursorプランを活用する
 
-**② Claude Max5 ＋ 補助AI**（約,20,000円）
+**② Claude Max5 ＋ 補助AI**（約20,000円）
 - 圧倒的パフォーマンスの「Maxプラン」主軸
 - 補助として$20のAIをペアで持つ最強の布陣
 
 </div>
 </div>
+
+---
+
+<style scoped>
+li { font-size: 20px; margin-bottom: 8px; }
+ul ul li { font-size: 18px; color: #c0c0c0; margin-bottom: 4px; }
+h3 { margin-top: 10px; margin-bottom: 5px; font-size: 28px; }
+</style>
+
+## AIツール導入時のセキュリティルール
+
+### 🔒 入力情報のポリシー（最重要）
+- **個人情報・機密情報は入力しない。必ず匿名化する**
+- **特許技術・機密ロジックは入力しない**
+- 「学習に使用しない」設定を過信しない
+  - サーバーに送った情報は、**やろうと思えば全部閲覧が可能と思うこと**
+  - *「重要な情報を、AI会社のサーバーに置いていいんだっけ？」という危機意識を持つ*
+
+### ⚙️ インストール・設定時に確認すること
+- **プライベートモード / 学習オフ設定を必ず有効にする**
+- IDE（CursorやClaude Code等）のconfig設定を確認してから使い始める
+
+### 🌐 AI選定時の追加ポイント
+- 入力情報を学習に「使う・使わない」は、あまり重要な判断基準ではない（感想です）
+- 中国系AIは**政府がデータ閲覧権を持つ**可能性 → 業務利用は慎重に
+  - 個人利用なら価格面で魅力的な選択肢ではある
 
 ---
 
@@ -632,19 +766,26 @@ h3 { margin-top: 5px; margin-bottom: 15px; font-size: 30px; }
 
 ---
 
-## 結果の振り返り
+<style scoped>
+h2 { margin-bottom: 8px; }
+h3 { font-size: 28px; margin-top: 14px; margin-bottom: 4px; }
+p { font-size: 22px; margin-top: 5px; line-height: 1.4; }
+</style>
+
+## 結果の振り返り（想像）
 
 ### 🧠 コード読解力
-バックエンドの複雑なドメイン設計思想（ValueObject）を
+- バックエンドのドメイン設計思想（ValueObject）を
 自律的に理解し**リファクタリング**できた
 
+### 🐛 バグの自力特定・修正
+- 一覧表示のデータ欠損をコードから自力で原因特定し、**的確に修正**できた
+
 ### 🎯 全体への影響範囲把握
-Bootstrap等のUI仕様を読み解き、
-既存レイアウトを**壊さずに**ダークモードを適用
+- Bootstrap等のUI仕様を読み解き、既存レイアウトを**壊さずに**ダークモードを適用
 
 ### 🌐 外部仕様の自己解決
-初見の天気予報APIの仕様をAIが**自力で解読**し、
-見事なウィジェットを完成
+- 初見の天気予報APIの仕様をAIが**自力で解読**し、見事なウィジェットを完成
 
 ---
 
@@ -656,9 +797,9 @@ li { margin-bottom: 4px; font-size: 22px; line-height: 1.3; }
 
 ## まとめ
 
-### 🔀 1. GitとCI/CDの導入
+### 🔀 1. Gitの導入
 - まだGitを使っていないグループはぜひ使い始めましょう！
-- 環境の問題などもありますが、導入時は **CI/CDも一緒に経験する** となお良い。
+- 環境の問題などもありますが、ローカルリポジトリならローカルでも動くので…
 
 ### 🎯 2. 「評価可能」な領域からAIを活用
 - 評価可能な仕様書・提案書作成、または **運用中の既存プロジェクト** から活用開始！
@@ -667,7 +808,8 @@ li { margin-bottom: 4px; font-size: 22px; line-height: 1.3; }
 - 新規開発プロジェクトの場合、開発を深く理解した **「AIマスター」** がいると勝率あがる。
 
 ### 💰 3. 迷ったら「Claude」
-- 迷ったら **Claude** のMaxプラン。障害対策として **2つ目のAIサービス** 契約を推奨。
+- 迷ったら **Claude** のPro または Maxプラン。障害対策として **2つ目のAIサービス** 契約を推奨。
+  - 最強は毎月変わる可能性があるので、柔軟にAIモデルを選べる仕組みがあると嬉しい
 
 ---
 
@@ -682,7 +824,7 @@ li { margin-bottom: 4px; font-size: 22px; line-height: 1.3; }
 
 ### ⚡ 今をトップスピードで楽しむ
 
-数年後には「誰でもできる（コモディティ化）」に変わるかもしれない。
+数年後には「誰でもできる（コモディティ）」状態になるかも。
 だからこそ、**今を楽しむ** ことが大事。
 
 ---
